@@ -1,5 +1,5 @@
 # 🎈 TS Playground 🎈
-- projects that don't deserve their own repository
+- small projects that don't deserve their own repository
 
 |created: | name:    |  what I have learned|
 |-|--------------------------------------|--------|
