@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug index.ts",
+      "type": "pwa-node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "args": ["${workspaceRoot}/src/index.ts"]
+    }
+  ],
+  "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"]
+}
