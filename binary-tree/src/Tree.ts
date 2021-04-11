@@ -7,10 +7,13 @@ export interface Tree {
   addRoot(value: number): void;
   add(value: number, parentNodeId: number, side: "left" | "right"): void;
   findNodeById(id: number): Node;
+  getSumOfSubtreeValues(node: Node): number;
+  getNumberOfNodesInSubtree(node: Node): number;
   printTree(): void;
   printNodeValueAndIndex(node: Node, comment: string): void;
   printSubtreeValuesSum(id: number): void;
-  sumSubtreeValues(node: Node): number;
+  printNumberOfNodesInSubtree(id: number): void;
+  printSubtreeAverageValue(id: number): void;
 }
 
 export class Tree {
@@ -48,6 +51,29 @@ export class Tree {
     return this.nodes.find((node) => node.id === id);
   };
 
+  getSumOfSubtreeValues = (node: Node): number => {
+    if (node === null) {
+      return 0;
+    }
+
+    return (
+      node.value +
+      this.getSumOfSubtreeValues(node.left) +
+      this.getSumOfSubtreeValues(node.right)
+    );
+  };
+
+  getNumberOfNodesInSubtree = (node: Node): number => {
+    if (node === null) {
+      return 0;
+    }
+    return (
+      this.getNumberOfNodesInSubtree(node.left) +
+      this.getNumberOfNodesInSubtree(node.right) +
+      1
+    );
+  };
+
   printTree = (): void => {
     this.nodes.map((node) => {
       this.printNodeIdAndValue(node, "");
@@ -63,18 +89,18 @@ export class Tree {
 
   printSubtreeValuesSum = (id: number): void => {
     let node = this.findNodeById(id);
-    console.log(this.sumSubtreeValues(node));
+    console.log(this.getSumOfSubtreeValues(node));
   };
 
-  sumSubtreeValues = (node: Node): number => {
-    if (node === null) {
-      return 0;
-    }
+  printNumberOfNodesInSubtree = (id: number): void => {
+    let node = this.findNodeById(id);
+    console.log(this.getNumberOfNodesInSubtree(node));
+  };
 
-    return (
-      node.value +
-      this.sumSubtreeValues(node.left) +
-      this.sumSubtreeValues(node.right)
-    );
+  printSubtreeAverageValue = (id: number): void => {
+    let node = this.findNodeById(id);
+    let sum = this.getSumOfSubtreeValues(node);
+    let numberOfNodes = this.getNumberOfNodesInSubtree(node);
+    console.log(sum / numberOfNodes);
   };
 }
