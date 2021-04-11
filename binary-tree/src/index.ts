@@ -1,7 +1,7 @@
 import { Tree } from "./Tree";
 import { LEFT, RIGHT } from "./constants";
 
-let tree = new Tree();
+const tree = new Tree();
 
 tree.addRoot(5);
 
@@ -18,4 +18,7 @@ tree.add(8, 6, RIGHT);
 
 tree.add(5, 8, RIGHT);
 
-tree.printSubtreeAverages(6);
+const subtree = tree.calculateSubtreeAverages(6);
+console.log(subtree.mean);
+console.log(subtree.median);
+console.log(subtree.sum);

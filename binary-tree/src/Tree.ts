@@ -11,9 +11,12 @@ export interface Tree {
   pushSubtreeNodesAndGetCount(node: Node): number;
   printTree(): void;
   printNodeValueAndIndex(node: Node, comment: string): void;
+  calculateSubtreeAverages(
+    id: number
+  ): { sum: number; mean: number; median: number };
 }
 
-export class Tree {
+export class Tree implements Tree {
   constructor() {
     this.root = null;
     this.nodes = [];
@@ -74,7 +77,9 @@ export class Tree {
     console.log(comment + ": [" + node?.id + "](" + node?.value + ")");
   };
 
-  printSubtreeAverages = (id: number): void => {
+  calculateSubtreeAverages = (
+    id: number
+  ): { sum: number; mean: number; median: number } => {
     this.subtreeNodes = [];
     const root = this.findNodeById(id);
     const count = this.pushSubtreeNodesAndGetCount(root);
@@ -89,8 +94,6 @@ export class Tree {
       count % 2 == 0
         ? (sortedValues[mid] + sortedValues[mid - 1]) / 2
         : sortedValues[mid - 1];
-    console.log("sum: " + sum);
-    console.log("mean: " + mean);
-    console.log("median: " + median);
+    return { sum, mean, median };
   };
 }
