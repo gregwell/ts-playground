@@ -4,22 +4,20 @@ import { LEFT, RIGHT } from "./constants";
 export interface Tree {
   root: Node | null;
   nodes: Node[];
+  subtreeNodes: Node[];
   addRoot(value: number): void;
   add(value: number, parentNodeId: number, side: "left" | "right"): void;
   findNodeById(id: number): Node;
-  getSumOfSubtreeValues(node: Node): number;
-  getNumberOfNodesInSubtree(node: Node): number;
+  pushSubtreeNodesAndGetCount(node: Node): number;
   printTree(): void;
   printNodeValueAndIndex(node: Node, comment: string): void;
-  printSubtreeValuesSum(id: number): void;
-  printNumberOfNodesInSubtree(id: number): void;
-  printSubtreeAverageValue(id: number): void;
 }
 
 export class Tree {
   constructor() {
     this.root = null;
     this.nodes = [];
+    this.subtreeNodes = [];
   }
 
   addRoot = (value: number): void => {
@@ -51,25 +49,14 @@ export class Tree {
     return this.nodes.find((node) => node.id === id);
   };
 
-  getSumOfSubtreeValues = (node: Node): number => {
+  pushSubtreeNodesAndGetCount = (node: Node): number => {
     if (node === null) {
       return 0;
     }
-
+    this.subtreeNodes.push(node);
     return (
-      node.value +
-      this.getSumOfSubtreeValues(node.left) +
-      this.getSumOfSubtreeValues(node.right)
-    );
-  };
-
-  getNumberOfNodesInSubtree = (node: Node): number => {
-    if (node === null) {
-      return 0;
-    }
-    return (
-      this.getNumberOfNodesInSubtree(node.left) +
-      this.getNumberOfNodesInSubtree(node.right) +
+      this.pushSubtreeNodesAndGetCount(node.left) +
+      this.pushSubtreeNodesAndGetCount(node.right) +
       1
     );
   };
@@ -87,20 +74,23 @@ export class Tree {
     console.log(comment + ": [" + node?.id + "](" + node?.value + ")");
   };
 
-  printSubtreeValuesSum = (id: number): void => {
-    let node = this.findNodeById(id);
-    console.log(this.getSumOfSubtreeValues(node));
-  };
+  printSubtreeAverages = (id: number): void => {
+    this.subtreeNodes = [];
+    const root = this.findNodeById(id);
+    const count = this.pushSubtreeNodesAndGetCount(root);
 
-  printNumberOfNodesInSubtree = (id: number): void => {
-    let node = this.findNodeById(id);
-    console.log(this.getNumberOfNodesInSubtree(node));
-  };
+    const values = this.subtreeNodes.map((node) => node.value);
+    const sum = values.reduce((sum, value) => (sum += value));
+    const mean = sum / count;
 
-  printSubtreeAverageValue = (id: number): void => {
-    let node = this.findNodeById(id);
-    let sum = this.getSumOfSubtreeValues(node);
-    let numberOfNodes = this.getNumberOfNodesInSubtree(node);
-    console.log(sum / numberOfNodes);
+    const sortedValues = values.sort();
+    const mid = Math.ceil(count / 2);
+    const median =
+      count % 2 == 0
+        ? (sortedValues[mid] + sortedValues[mid - 1]) / 2
+        : sortedValues[mid - 1];
+    console.log("sum: " + sum);
+    console.log("mean: " + mean);
+    console.log("median: " + median);
   };
 }

@@ -18,6 +18,4 @@ tree.add(8, 6, RIGHT);
 
 tree.add(5, 8, RIGHT);
 
-tree.printSubtreeValuesSum(0);
-tree.printNumberOfNodesInSubtree(0);
-tree.printSubtreeAverageValue(0);
+tree.printSubtreeAverages(6);
