@@ -1,7 +1,10 @@
-import { Tree } from "./Tree";
+import { MyTree } from "./MyTree";
 import { LEFT, RIGHT } from "./constants";
+import { Tree } from "./Tree";
 
-const tree = new Tree();
+let tree : Tree;
+
+tree = new MyTree();
 
 tree.addRoot(5);
 
