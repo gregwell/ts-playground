@@ -9,6 +9,8 @@ export interface Tree {
   findNodeById(id: number): Node;
   printTree(): void;
   printNodeValueAndIndex(node: Node, comment: string): void;
+  printSubtreeValuesSum(id: number): void;
+  sumSubtreeValues(node: Node): number;
 }
 
 export class Tree {
@@ -57,5 +59,22 @@ export class Tree {
 
   printNodeIdAndValue = (node: Node, comment: string): void => {
     console.log(comment + ": [" + node?.id + "](" + node?.value + ")");
+  };
+
+  printSubtreeValuesSum = (id: number): void => {
+    let node = this.findNodeById(id);
+    console.log(this.sumSubtreeValues(node));
+  };
+
+  sumSubtreeValues = (node: Node): number => {
+    if (node === null) {
+      return 0;
+    }
+
+    return (
+      node.value +
+      this.sumSubtreeValues(node.left) +
+      this.sumSubtreeValues(node.right)
+    );
   };
 }

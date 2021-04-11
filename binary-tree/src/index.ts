@@ -18,4 +18,4 @@ tree.add(8, 6, RIGHT);
 
 tree.add(5, 8, RIGHT);
 
-tree.printTree();
+tree.printSubtreeValuesSum(8);
