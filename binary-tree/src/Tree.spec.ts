@@ -10,18 +10,18 @@ describe("Testing the correctness of calculations based on data from the task", 
     tree = new MyTree();
     tree.addRoot(5);
 
-    tree.add(3, 0 + usedNodeIds, LEFT);
-    tree.add(7, 0 + usedNodeIds, RIGHT);
+    tree.addLeaf(3, 0 + usedNodeIds, LEFT);
+    tree.addLeaf(7, 0 + usedNodeIds, RIGHT);
 
-    tree.add(2, 1 + usedNodeIds, LEFT);
-    tree.add(5, 1 + usedNodeIds, RIGHT);
-    tree.add(1, 2 + usedNodeIds, LEFT);
-    tree.add(0, 2 + usedNodeIds, RIGHT);
+    tree.addLeaf(2, 1 + usedNodeIds, LEFT);
+    tree.addLeaf(5, 1 + usedNodeIds, RIGHT);
+    tree.addLeaf(1, 2 + usedNodeIds, LEFT);
+    tree.addLeaf(0, 2 + usedNodeIds, RIGHT);
 
-    tree.add(2, 6 + usedNodeIds, LEFT);
-    tree.add(8, 6 + usedNodeIds, RIGHT);
+    tree.addLeaf(2, 6 + usedNodeIds, LEFT);
+    tree.addLeaf(8, 6 + usedNodeIds, RIGHT);
 
-    tree.add(5, 8 + usedNodeIds, RIGHT);
+    tree.addLeaf(5, 8 + usedNodeIds, RIGHT);
   });
 
   afterEach(() => {
