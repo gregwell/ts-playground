@@ -16,31 +16,44 @@ export class MyTree implements Tree {
 
   addRoot = (value: number): void => {
     if (this.root !== null) {
-      console.log("You can only have one root in your tree!");
-      return;
+      throw new Error("The root already exists.");
     }
+    this.validateValue(value);
 
     this.root = new MyNode(value, null);
     this.nodes.push(this.root);
   };
 
-  add = (value: number, parentNodeId: number, side: "left" | "right"): void => {
+  addLeaf = (
+    value: number,
+    parentNodeId: number,
+    side: "left" | "right"
+  ): void => {
     if (this.root === null) {
-      console.log("Add root node before adding other nodes!");
-      return;
+      throw new Error(`Attempt to add a ${side} child that already exists.`);
+    }
+    const parentNode = this.findNodeById(parentNodeId);
+    if (parentNode[side] !== null) {
+      throw new Error("");
     }
 
-    if (parentNodeId === null) return;
-    if (!this.findNodeById(parentNodeId)) return;
+    this.validateValue(value);
 
-    const parentNode = this.findNodeById(parentNodeId);
     const newNode = new MyNode(value, parentNode);
     parentNode.setChild(newNode, side);
     this.nodes.push(newNode);
   };
 
   findNodeById = (id: number): Node => {
-    return this.nodes.find((node) => node.id === id);
+    const node = this.nodes.find((node) => node.id === id);
+
+    if (!node) {
+      throw new Error(
+        "Invalid ID passed. There is no node with the provided ID."
+      );
+    }
+
+    return node;
   };
 
   pushSubtreeNodesAndGetCount = (node: Node): number => {
@@ -86,5 +99,11 @@ export class MyTree implements Tree {
         ? (sortedValues[mid] + sortedValues[mid - 1]) / 2
         : sortedValues[mid - 1];
     return { sum, mean, median };
+  };
+
+  validateValue = (value: number): void => {
+    if (!Number.isInteger(value)) {
+      throw new Error("Invalid value passed. Expected to be an integer.");
+    }
   };
 }
