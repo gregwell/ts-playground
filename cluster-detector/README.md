@@ -1,5 +1,5 @@
 # Cluster Detector
 
-- a console application that returns the number of clusters that typed numbers form
-- cluster detector is created with the given cluster spacing
-- each number is accepted using the accept method
+- *clusterCount* method returns the number of clusters that typed numbers form
+- The minimum distance between number values is determined by provided *spacing*
+- Each time an addition is made, an analysis of the new cluster division is performed.
