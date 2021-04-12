@@ -1,5 +1,5 @@
 import { Node } from "./Node";
-import { LEFT, RIGHT } from "./constants";
+import { LEFT, RIGHT, errors } from "./constants";
 import { Tree } from "./Tree";
 import { MyNode } from "./MyNode";
 
@@ -16,7 +16,7 @@ export class MyTree implements Tree {
 
   addRoot = (value: number): void => {
     if (this.root !== null) {
-      throw new Error("The root already exists.");
+      throw new Error(errors.rootAlreadyExists);
     }
     this.validateValue(value);
 
@@ -30,11 +30,11 @@ export class MyTree implements Tree {
     side: "left" | "right"
   ): void => {
     if (this.root === null) {
-      throw new Error(`Attempt to add a ${side} child that already exists.`);
+      throw new Error(errors.noRoot);
     }
     const parentNode = this.findNodeById(parentNodeId);
     if (parentNode[side] !== null) {
-      throw new Error("");
+      throw new Error(errors.childAlreadyExists);
     }
 
     this.validateValue(value);
@@ -48,9 +48,7 @@ export class MyTree implements Tree {
     const node = this.nodes.find((node) => node.id === id);
 
     if (!node) {
-      throw new Error(
-        "Invalid ID passed. There is no node with the provided ID."
-      );
+      throw new Error(errors.invalidId);
     }
 
     return node;
@@ -103,7 +101,7 @@ export class MyTree implements Tree {
 
   validateValue = (value: number): void => {
     if (!Number.isInteger(value)) {
-      throw new Error("Invalid value passed. Expected to be an integer.");
+      throw new Error(errors.invalidValue);
     }
   };
 }
