@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" errors="0" time="4.843">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-12T13:37:06" time="2.027" tests="3">
-    <testcase classname="" name="returns correct averages when the root of the subtree is the same as the main tree" time="0.013">
+<testsuites name="jest tests" tests="9" failures="0" errors="0" time="6.545">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-06-24T13:15:09" time="5.43" tests="3">
+    <testcase classname="" name="returns correct averages when the root of the subtree is the same as the main tree" time="0.008">
     </testcase>
-    <testcase classname="" name="returns correct averages when the root of the subtree is in the middle of the main tree" time="0.002">
+    <testcase classname="" name="returns correct averages when the root of the subtree is in the middle of the main tree" time="0.003">
     </testcase>
     <testcase classname="" name="returns correct averages when the root of the subtree is a leaf of the main tree" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-12T13:37:06" time="3.825" tests="6">
-    <testcase classname="" name="throws an error when trying to add a root that already exists" time="0.009">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-06-24T13:15:09" time="5.461" tests="6">
+    <testcase classname="" name="throws an error when trying to add a root that already exists" time="0.041">
     </testcase>
-    <testcase classname="" name="throws an error when trying to add a leaf when there is no root in the tree" time="0">
+    <testcase classname="" name="throws an error when trying to add a leaf when there is no root in the tree" time="0.001">
     </testcase>
-    <testcase classname="" name="throws an error when the root value is not an integer" time="0.001">
+    <testcase classname="" name="throws an error when the root value is not an integer" time="0.002">
     </testcase>
-    <testcase classname="" name="throws an error when the leaf value is not an integer" time="0">
+    <testcase classname="" name="throws an error when the leaf value is not an integer" time="0.002">
     </testcase>
-    <testcase classname="" name="throws an error when trying to add a child to the parent that already has one" time="0.001">
+    <testcase classname="" name="throws an error when trying to add a child to the parent that already has one" time="0.002">
     </testcase>
     <testcase classname="" name="throws an error when the node with provided id does not exist" time="0.002">
     </testcase>
