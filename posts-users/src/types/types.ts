@@ -34,3 +34,15 @@ export type Company = {
   catchPhrase: string;
   bs: string;
 };
+
+export type PostsResponse = {
+  status: "idle" | "pending" | "success" | "error";
+  data: Post[];
+  error: string | null;
+};
+
+export type UsersResponse = {
+  status: "idle" | "pending" | "success" | "error";
+  data: User[];
+  error: string | null;
+};

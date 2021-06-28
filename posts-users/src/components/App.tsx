@@ -1,4 +1,4 @@
-import { Post, User } from '../types/types';
+import { Post, PostsResponse, User, UsersResponse } from '../types/types';
 import useFetchedData from '../hooks/useFetchedData';
 import { Container, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
 
-  const posts = useFetchedData("posts");
-  const users = useFetchedData("users");
+  const posts:PostsResponse = useFetchedData("posts");
+  const users:UsersResponse = useFetchedData("users");
 
   const classes = useStyles();
 
