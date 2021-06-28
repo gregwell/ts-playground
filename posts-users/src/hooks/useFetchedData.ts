@@ -1,13 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
-import { Post } from "../types/types";
 import { SUCCESS, PENDING, ERROR, IDLE } from "../constants/status";
 import axios from "axios";
 
-const usePosts = () => {
+const useFetchedData = (alias: string) => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >(IDLE);
-  const [posts, setPosts] = useState<Array<Post>>([]);
+  const [data, setData] = useState<any>([]);
   const [error, setError] = useState<string | null>(null);
 
   const execute = useCallback(async () => {
@@ -15,24 +14,24 @@ const usePosts = () => {
     setError(null);
 
     try {
-      const result = await axios.request<Array<Post>>({
-        url: "https://jsonplaceholder.typicode.com/posts",
+      const result = await axios.request<any>({
+        url: `https://jsonplaceholder.typicode.com/${alias}`,
         method: "get",
       });
       console.log(result);
-      setPosts(result.data);
+      setData(result.data);
       setStatus(SUCCESS);
     } catch (error) {
       setError(error);
       setStatus(ERROR);
     }
-  }, []);
+  }, [alias]);
 
   useEffect(() => {
-      execute();
-  }, [execute])
+    execute();
+  }, [execute]);
 
-  return { status, posts, error};
+  return { status, data, error };
 };
 
-export default usePosts;
+export default useFetchedData;

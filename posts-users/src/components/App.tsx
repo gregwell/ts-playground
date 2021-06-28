@@ -1,27 +1,63 @@
-import React from 'react';
-import usePosts from '../hooks/usePosts';
-import './App.css';
-import { Post } from '../types/types';
+import { Post, User } from '../types/types';
+import useFetchedData from '../hooks/useFetchedData';
+import { Container, Grid, Typography } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  userName: {
+    padding: "0 0px",
+    fontSize: "35px",
+  },
+  root: {
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+  gridItem: {
+    width: "30%",
+    height: "100px",
+    backgroundColor: "green",
+    marginLeft: "10px",
+  },
+  gridContainer: {
+    alignContent: "center",
+  },
+  container: {
+    width: "600px",
+  },
+}));
+
 
 function App() {
 
-  const posts = usePosts();
+  const posts = useFetchedData("posts");
+  const users = useFetchedData("users");
 
-  const handleClick = () => {
-      console.log(posts.posts);
-  }
+  const classes = useStyles();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={handleClick}>kliknij mnie</button>
-        {posts.posts.map((post:Post, index:number) => {
+    <div className={classes.root}>
+        {users.data.map((user:User, userIndex:number) => {
           return(
-            <p key={index}>{post.title}</p>
+            <>
+              <Typography className={classes.userName} key={userIndex}>{user.name}</Typography>
+              <Container className={classes.container} key={userIndex}>
+                <Grid container className={classes.gridContainer} key={userIndex}>
+                  {posts.data.map((post:Post, postIndex:number) => {
+                    return (
+                      <>
+                      {user.id === post.userId && (
+                        <>
+                          <p key={postIndex}>{post.title}</p>
+                        </>
+                      )}
+                      </>
+                    )
+                  })}
+                </Grid>
+              </Container>
+            </>
           )
         })}
-        
-      </header>
     </div>
   );
 }
