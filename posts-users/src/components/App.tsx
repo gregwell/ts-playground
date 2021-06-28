@@ -1,4 +1,4 @@
-import { Post, PostsResponse, User, UsersResponse } from '../types/types';
+import { PostsResponse, User, UsersResponse } from '../types/types';
 import useFetchedData from '../hooks/useFetchedData';
 import { Container, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,6 +34,8 @@ function App() {
 
   const classes = useStyles();
 
+
+
   return (
     <div className={classes.root}>
         {users.data.map((user:User, userIndex:number) => {
@@ -42,17 +44,7 @@ function App() {
               <Typography className={classes.userName} key={userIndex}>{user.name}</Typography>
               <Container className={classes.container} key={userIndex}>
                 <Grid container className={classes.gridContainer} key={userIndex}>
-                  {posts.data.map((post:Post, postIndex:number) => {
-                    return (
-                      <>
-                      {user.id === post.userId && (
-                        <>
-                          <p key={postIndex}>{post.title}</p>
-                        </>
-                      )}
-                      </>
-                    )
-                  })}
+                  <p>{user.name} has written {posts.data.filter(post => user.id === post.userId).length} posts.</p>
                 </Grid>
               </Container>
             </>
